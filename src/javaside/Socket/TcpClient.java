@@ -51,7 +51,16 @@ public class TcpClient{
                         Thread.sleep(readInterval);
                         String line = bReader.readLine();
                         
-                        if(handler != null) handler.onMessage(line);
+                        if(handler != null)
+                        {   if(line!=null)
+                            {
+                                handler.onMessage(line);
+                            }
+                            else
+                            {
+                               that.close();
+                            }
+                        }
                         
                     }
                     catch(SocketException ex){
